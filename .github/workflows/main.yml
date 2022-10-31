@@ -1,0 +1,32 @@
+name: Docker WIKMD
+
+on:
+  schedule:
+    - cron:  '0 0 * * 1,5'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: docker login
+      run: |
+        echo ${{ secrets.DOCKER_PASSWORD }} | docker login --username ${{ secrets.DOCKER_USER }} --password-stdin 
+
+    - name: docker buildx multiarch
+      run: |
+        docker buildx create --name multiarch
+        docker buildx use multiarch
+        docker buildx inspect --bootstrap
+
+    - name: clone repo
+      run: |
+        git clone https://github.com/Linbreux/wikmd
+
+    - name: docker build wikimd
+      env:
+        DOCKER_USER: ${{ secrets.DOCKER_USER }}   
+      run: |
+        cd wikmd
+        docker buildx build -f docker/Dockerfile.aarch64 . -t $DOCKER_USER/wikmd:latest --platform linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64 --push
