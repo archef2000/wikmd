@@ -29,4 +29,4 @@ jobs:
         DOCKER_USER: ${{ secrets.DOCKER_USER }}   
       run: |
         cd wikmd
-        docker buildx build -f docker/Dockerfile.aarch64 . -t $DOCKER_USER/wikmd:latest --platform linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64 --push
+        docker buildx build -f docker/Dockerfile.aarch64 . -t $DOCKER_USER/wikmd:latest --platform linux/amd64,linux/arm/v7,linux/arm64 --push
