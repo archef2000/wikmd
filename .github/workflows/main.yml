@@ -24,23 +24,11 @@ jobs:
     - name: docker login
       run: |
         echo ${{ secrets.DOCKER_PASSWORD }} | docker login --username ${{ secrets.DOCKER_USER }} --password-stdin 
-
-    #- name: docker buildx multiarch
-    #  run: |
-    #    docker buildx create --name multiarch
-    #    docker buildx use multiarch
-    #    docker buildx inspect --bootstrap
-
+        
     - name: clone repo
       run: |
         git clone https://github.com/Linbreux/wikmd
 
-    #- name: docker build wikimd
-    #  env:
-    #    DOCKER_USER: ${{ secrets.DOCKER_USER }}   
-    #  run: |
-    #    cd wikmd
-    #    docker buildx build -f docker/Dockerfile . -t $DOCKER_USER/wikmd:latest --platform linux/amd64 --push
     - name: docker build wikimd
       env:
         DOCKER_USER: ${{ secrets.DOCKER_USER }}   
