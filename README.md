@@ -6,7 +6,7 @@ Multiarch wikmd docker container from [Linbreux](https://github.com/Linbreux/wik
 version: "2.1"
 services:
   wikmd:
-    image: linbreux/wikmd:latest
+    image: archef200/wikmd:latest
     container_name: wikmd
     environment:
       - PUID=1000
@@ -35,7 +35,7 @@ docker run -d \
   -p 5000:5000 \
   -v /path/to/wiki:/wiki \
   --restart unless-stopped \
-  linbreux/wikmd:latest
+  archef200/wikmd:latest
 ```
 
 # Variables,
