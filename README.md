@@ -42,8 +42,8 @@ docker run -d \
 ## Environment Variables
 | Variable | Required | Function | Example |
 |----------|----------|----------|----------|
-|`PUID`|yes|for UserID - see below for explanation|`PUID=1000`|
-|`PGID`|yes|for GroupID - see below for explanation|`PGID=1000`|
+|`PUID`|yes|for UserID|`PUID=1000`|
+|`PGID`|yes|for GroupID|`PGID=1000`|
 |`TZ`|yes|Specify a timezone to use EG Europe/Paris|`TZ=Europe/Paris`|
 |`HOMEPAGE`|no|Specify the file to use as a homepage|`HOMEPAGE=homepage.md`|
 |`HOMEPAGE_TITLE`|no|Specify the homepage's title|`HOMEPAGE_TITLE=title`|
