@@ -27,11 +27,12 @@ jobs:
         
     - name: clone repo
       run: |
-        git clone https://github.com/Linbreux/wikmd
+        curl -s https://api.github.com/repos/Linbreux/wikmd/releases/latest | grep "zipball_url" | cut -d : -f 2,3 | tr -d \", | wget -qi - -O test.zip && unzip -q -o test.zip -d test
 
     - name: docker build wikimd
       env:
         DOCKER_USER: ${{ secrets.DOCKER_USER }}   
       run: |
-        cd wikmd
+        cd test
+        cd "$(ls)"
         docker buildx build -f docker/Dockerfile.aarch64 . -t $DOCKER_USER/wikmd:latest --platform linux/arm64/v8,linux/amd64,linux/arm/v7,linux/arm/v6 --push
